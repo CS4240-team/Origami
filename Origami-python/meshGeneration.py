@@ -109,10 +109,35 @@ def generate(file_name, vlist, tlist):
     with open(file_name, "w") as fptr:
         fptr.write("# File: '" + file_name + "'\n")
         fptr.write("o " + (file_name.split("/")[-1]).split(".")[0] + "\n")
-        for v in vlist:
-            fptr.write("v {} {} 0.0".format(v[0] * scale, v[1] * scale) + "\n")
-        for t in tlist:
-            fptr.write("f {} {} {}".format(t[0], t[1], t[2]) + "\n")
+        if is_manifold:
+            for v in vlist:
+                fptr.write("v {} {} {}".format(v[0] * scale, v[1] * scale, thickness/2.0) + "\n")
+            for v in vlist:
+                fptr.write("v {} {} {}".format(v[0] * scale, v[1] * scale, -thickness/2.0) + "\n")
+            for t in tlist:
+                # for a triangle with vertex number a, b, and c, the other vertices will be a+len(v_list), b+len(v_list)
+                # and c+len(v_list)
+                # all the triangles will be abc, aa'b', ab'b, bb'c', bc'c, cc'a', ca'a and c'b'a'
+                a = t[0]
+                b = t[1]
+                c = t[2]
+                a_p = t[0] + len(vlist)
+                b_p = t[1] + len(vlist)
+                c_p = t[2] + len(vlist)
+                fptr.write("f {} {} {}".format(a, b, c) + "\n")
+                fptr.write("f {} {} {}".format(a, a_p, b_p) + "\n")
+                fptr.write("f {} {} {}".format(a, b_p, b) + "\n")
+                fptr.write("f {} {} {}".format(b, b_p, c_p) + "\n")
+                fptr.write("f {} {} {}".format(b, c_p, c) + "\n")
+                fptr.write("f {} {} {}".format(c, c_p, a_p) + "\n")
+                fptr.write("f {} {} {}".format(c, a_p, a) + "\n")
+                fptr.write("f {} {} {}".format(c_p, b_p, a_p) + "\n")
+
+        else:
+            for v in vlist:
+                fptr.write("v {} {} 0.0".format(v[0] * scale, v[1] * scale) + "\n")
+            for t in tlist:
+                fptr.write("f {} {} {}".format(t[0], t[1], t[2]) + "\n")
 
 
 def run():
