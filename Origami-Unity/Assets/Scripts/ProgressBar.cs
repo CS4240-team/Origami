@@ -16,7 +16,7 @@ public class ProgressBar : MonoBehaviour
 
 	void Update()
 	{
-		transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.back, Camera.main.transform.rotation * Vector3.left);
+		//transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.back, Camera.main.transform.rotation * Vector3.left);
 		//transform.localScale = Vector3.one * (Vector3.Distance (Camera.main.transform.position, transform.position) * 0.1f);
 		if (speed > 0 && barFill.transform.localScale.x < 1)
 		{
