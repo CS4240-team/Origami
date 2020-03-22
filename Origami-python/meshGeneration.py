@@ -17,7 +17,7 @@ vlist = [(-1, 1),  # A
          (-1, 0),  # B
          (np.tan(np.pi/16.0)-1, 0),  # C
          (np.tan(np.pi/8.0)-1, 0),  # D
-         (np.tan(np.pi / 8.0)-1+x, x),  # E
+         (np.tan(np.pi/8.0)-1+x, x),  # E
          (-y, y),  # F
          (0, 0),  # G
          (-z/4.0, z/4.0),  # H
