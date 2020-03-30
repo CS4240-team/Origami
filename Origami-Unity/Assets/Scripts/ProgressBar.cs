@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Microsoft.MixedReality.Toolkit.UI;
 
 public class ProgressBar : MonoBehaviour
 {
-
-	private GameObject barFill;
 	public float speed;
+	public BoundingBox parent;
+	private GameObject barFill;
 
 	void Start()
 	{
@@ -17,7 +18,6 @@ public class ProgressBar : MonoBehaviour
 	void Update()
 	{
 		//transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.back, Camera.main.transform.rotation * Vector3.left);
-		//transform.localScale = Vector3.one * (Vector3.Distance (Camera.main.transform.position, transform.position) * 0.1f);
 		if (speed > 0 && barFill.transform.localScale.x < 1)
 		{
 			barFill.transform.localScale += new Vector3(0.01f * speed, 0, 0);
@@ -31,7 +31,7 @@ public class ProgressBar : MonoBehaviour
 
 	public void enlargeCanvas(bool val)
 	{
-		if (val)
+		if (val && (parent == null || (parent != null && !parent.Active)))
 			transform.localScale = new Vector3(1, 1, 1);
 		else
 		{
