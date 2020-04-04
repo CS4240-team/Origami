@@ -22,15 +22,18 @@ public class ChangeStep : MonoBehaviour
 
     public void changeStep(int n)
     {
-        step += n;
-        if (step == 1)
+        if (step + n < 1)
             leftArrow.IsEnabled = false;
-        else if (step == 16)
+        else if (step + n > 16)
             rightArrow.IsEnabled = false;
-        else if (!leftArrow.IsEnabled)
-            leftArrow.IsEnabled = true;
-        else if (!rightArrow.IsEnabled)
-            rightArrow.IsEnabled = true;
-        step_t.text = step.ToString() + " / 16";
+        else
+        {
+            step += n;
+            step_t.text = step.ToString() + " / 16";
+            if (!leftArrow.IsEnabled)
+                leftArrow.IsEnabled = true;
+            else if (!rightArrow.IsEnabled)
+                rightArrow.IsEnabled = true;
+        }
     }
 }
