@@ -38,7 +38,7 @@ MonoBehaviour:
   lookHorizontal: AXIS_4
   lookVertical: AXIS_5
   simulateEyePosition: 0
-  defaultHandSimulationMode: 2
+  defaultHandSimulationMode: 1
   toggleLeftHandKey:
     bindingType: 2
     code: 116
@@ -62,7 +62,7 @@ MonoBehaviour:
   rightMouseHandGesture: 0
   handGestureAnimationSpeed: 8
   holdStartDuration: 0.5
-  navigationStartThreshold: 0.01
+  navigationStartThreshold: 0.03
   defaultHandDistance: 0.5
   handDepthMultiplier: 0.03
   handJitterAmount: 0

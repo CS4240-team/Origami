@@ -14,7 +14,7 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
 
         if (inputActionType == "Navigation Action")
         {
-            gameObject.transform.localScale = new Vector3(1.05f, 1.05f, 1f);
+            gameObject.transform.localScale = new Vector3(1.02f, 1.02f, 1f);
         }
     }
 
@@ -33,7 +33,6 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
         {
             Vector3 inputDir = gameObject.transform.rotation * eventData.InputData;
             gameObject.transform.Rotate(new Vector3(0f, 0f, (inputDir.x - inputDir.z) * rotationSpeed));
-            Debug.Log($"Rotate on Z axis by {inputDir.x - inputDir.z}");
         }
     }
 

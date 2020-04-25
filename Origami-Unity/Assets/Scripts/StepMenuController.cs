@@ -36,9 +36,9 @@ namespace Microsoft.MixedReality.Toolkit.UI
         public void selectStep(int stepNo)
         {
             Debug.Log($"Step {stepNo} selected");
-            //unpopulateMenu();
-            //stepsMenu.SetActive(false);
-            //uiController.displayInstructionMenu(stepNo);
+            unpopulateMenu();
+            stepsMenu.SetActive(false);
+            uiController.displayInstructionMenu(stepNo);
         }
 
         private void RotateMenu(float deg)
@@ -56,10 +56,12 @@ namespace Microsoft.MixedReality.Toolkit.UI
         {
             for (int x = 0; x < total; x++)
             {
-                //Position button accordingly
+                //Create button
                 Vector3 pos = new Vector3(Mathf.Cos(x * angle * Mathf.Deg2Rad) * menuRadius, Mathf.Sin(x * angle * Mathf.Deg2Rad) * menuRadius, 0);
                 Quaternion rot = Quaternion.Euler(0f, 0f, x * angle);
-                GameObject buttonInstance = Instantiate(stepButtonPrefab, stepMenuCircle.transform.position + pos, rot, stepMenuCircle.transform);
+                pos = stepMenuCircle.transform.rotation * pos;
+                GameObject buttonInstance = Instantiate(stepButtonPrefab, stepMenuCircle.transform.position + pos, stepMenuCircle.transform.rotation * rot, stepMenuCircle.transform);
+                buttonInstance.name = $"button {x + 1}";
 
                 //Change number accordingly
                 GameObject grandchild = buttonInstance.transform.GetChild(0).GetChild(0).gameObject;
@@ -84,8 +86,8 @@ namespace Microsoft.MixedReality.Toolkit.UI
                         Target = buttonInstance
                     }
                 };
-                Debug.Log($"Button No {x + 1}");
-                interactable.OnClick.AddListener(() => this.selectStep((x + 1)));
+
+                interactable.OnClick.AddListener(() => this.selectStep(int.Parse(buttonInstance.name.Substring(7))));
 
                 //Disable the currently chosen step
                 if (x == current - 1)
