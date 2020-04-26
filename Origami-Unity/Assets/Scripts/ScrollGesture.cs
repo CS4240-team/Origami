@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.Input;
+using Microsoft.MixedReality.Toolkit.UI;
 
 public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
 {
+    public StepMenuController stepmenuScript;
+
     public float rotationSpeed = 1;
 
     public void OnGestureStarted(InputEventData eventData)
@@ -32,7 +35,11 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
         if (inputActionType == "Navigation Action")
         {
             Vector3 inputDir = gameObject.transform.rotation * eventData.InputData;
-            gameObject.transform.Rotate(new Vector3(0f, 0f, (inputDir.x - inputDir.z) * rotationSpeed));
+            //gameObject.transform.Rotate(new Vector3(0f, 0f, (inputDir.x + inputDir.y) * rotationSpeed));
+            Vector3 rot = transform.rotation.eulerAngles + new Vector3(0, 0 , (inputDir.x + inputDir.y) * rotationSpeed); //use local if your char is not always oriented Vector3.up
+            rot.z = ClampAngle(rot.z, stepmenuScript.getStepTotal("crane") * (stepmenuScript.getAngle() - 1) * -1, 0f);
+
+            transform.eulerAngles = rot;
         }
     }
 
@@ -62,5 +69,13 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
         {
             gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         }
+    }
+
+    float ClampAngle(float angle, float from, float to)
+    {
+        // accepts e.g. -80, 80
+        if (angle < 0f) angle = 360 + angle;
+        if (angle > 180f) return Mathf.Max(angle, 360 + from);
+        return Mathf.Min(angle, to);
     }
 }

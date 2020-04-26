@@ -17,11 +17,12 @@ namespace Microsoft.MixedReality.Toolkit.UI
 
         private readonly float menuRadius = -13.2f;
         private readonly float angle = 7f;
+        private int stepCount = 10;
 
         private void Awake()
         {
             //For testing
-            populateStepsMenu(1, 10);
+            populateStepsMenu(1, stepCount);
         }
 
         public void displayStepSelectionScreen(string origami)
@@ -46,10 +47,17 @@ namespace Microsoft.MixedReality.Toolkit.UI
             stepMenuCircle.transform.Rotate(0, 0, -deg);
         }
 
-        private int getStepTotal(string origami)
+        public int getStepTotal(string origami)
         {
             //Return a fixed number for now
-            return 16;
+            if(origami.Equals("crane"))
+                return 10;
+            return 10;
+        }
+
+        public float getAngle()
+        {
+            return angle;
         }
 
         private void populateStepsMenu(int current, int total)
