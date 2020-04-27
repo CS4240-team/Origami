@@ -34,12 +34,11 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
 
         if (inputActionType == "Navigation Action")
         {
-            Vector3 inputDir = gameObject.transform.rotation * eventData.InputData;
-            //gameObject.transform.Rotate(new Vector3(0f, 0f, (inputDir.x + inputDir.y) * rotationSpeed));
-            Vector3 rot = transform.rotation.eulerAngles + new Vector3(0, 0 , (inputDir.x + inputDir.y) * rotationSpeed); //use local if your char is not always oriented Vector3.up
-            rot.z = ClampAngle(rot.z, stepmenuScript.getStepTotal("crane") * (stepmenuScript.getAngle() - 1) * -1, 0f);
+            Vector3 inputDir = eventData.InputData;
+            float z = (inputDir.x + inputDir.y) * rotationSpeed;
+            z = ClampAngle(z, (stepmenuScript.getStepTotal("crane") - 1) * stepmenuScript.getAngle() * -1, 0f);
 
-            transform.eulerAngles = rot;
+            transform.Rotate(new Vector3(0,0,z));
         }
     }
 
