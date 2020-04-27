@@ -15,7 +15,7 @@ namespace Microsoft.MixedReality.Toolkit.UI
         public Theme buttonTheme;
         public States buttonsStates;
 
-        private readonly float menuRadius = -1.32f;
+        private readonly float menuRadius = -13.2f;
         private readonly float angle = 7f;
 
         private void OnEnable()
@@ -49,13 +49,19 @@ namespace Microsoft.MixedReality.Toolkit.UI
 
         private void populateStepsMenu(int current, int total)
         {
+            Vector3 parentGlobalScale = stepMenuCircle.transform.lossyScale;
+            Vector3 parentPosition = stepMenuCircle.transform.position;
+            Quaternion parentRotation = stepMenuCircle.transform.rotation;
+
             for (int x = 0; x < total; x++)
             {
                 //Create button
-                Vector3 pos = new Vector3(Mathf.Cos(x * angle * Mathf.Deg2Rad) * menuRadius, Mathf.Sin(x * angle * Mathf.Deg2Rad) * menuRadius, 0);
+                Vector3 pos = new Vector3(Mathf.Cos(x * angle * Mathf.Deg2Rad) * menuRadius * parentGlobalScale.x,
+                                          Mathf.Sin(x * angle * Mathf.Deg2Rad) * menuRadius * parentGlobalScale.y,
+                                          0);
                 Quaternion rot = Quaternion.Euler(0f, 0f, x * angle);
-                pos = stepMenuCircle.transform.rotation * pos;
-                GameObject buttonInstance = Instantiate(stepButtonPrefab, stepMenuCircle.transform.position + pos, stepMenuCircle.transform.rotation * rot, stepMenuCircle.transform);
+                pos = parentRotation * pos;
+                GameObject buttonInstance = Instantiate(stepButtonPrefab, parentPosition + pos, parentRotation * rot, stepMenuCircle.transform);
                 buttonInstance.name = $"button {x + 1}";
 
                 //Change number accordingly
