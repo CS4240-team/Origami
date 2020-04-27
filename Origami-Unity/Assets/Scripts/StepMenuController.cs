@@ -15,21 +15,15 @@ namespace Microsoft.MixedReality.Toolkit.UI
         public Theme buttonTheme;
         public States buttonsStates;
 
-        private readonly float menuRadius = -13.2f;
+        private readonly float menuRadius = -1.32f;
         private readonly float angle = 7f;
-        private int stepCount = 10;
 
-        private void Awake()
-        {
-            //For testing
-            populateStepsMenu(1, stepCount);
-        }
-
-        public void displayStepSelectionScreen(string origami)
+        private void OnEnable()
         {
             Debug.Log("Switching to Steps Menu");
-            int stepsTotal = getStepTotal(origami);
+            string origami = uiController.getOrigami();
             int currentStep = uiController.getCurrentStep();
+            int stepsTotal = uiController.getStepsTotal(origami);
             populateStepsMenu(currentStep, stepsTotal);
             stepsMenu.SetActive(true);
         }
@@ -45,14 +39,6 @@ namespace Microsoft.MixedReality.Toolkit.UI
         private void RotateMenu(float deg)
         {
             stepMenuCircle.transform.Rotate(0, 0, -deg);
-        }
-
-        public int getStepTotal(string origami)
-        {
-            //Return a fixed number for now
-            if(origami.Equals("crane"))
-                return 10;
-            return 10;
         }
 
         public float getAngle()

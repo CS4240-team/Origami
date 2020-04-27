@@ -1327,7 +1327,7 @@ PrefabInstance:
     - target: {fileID: 3103152979817623356, guid: 5e77d3ba4d3aef54da5d175e1d7914d9,
         type: 3}
       propertyPath: VoiceCommand
-      value: Menu
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3103152979817623356, guid: 5e77d3ba4d3aef54da5d175e1d7914d9,
         type: 3}
@@ -1493,7 +1493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  parent: {fileID: 0}
+  mainMenuController: {fileID: 0}
 --- !u!114 &282746970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5205,7 +5205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  parent: {fileID: 0}
+  mainMenuController: {fileID: 0}
 --- !u!114 &1219657202
 MonoBehaviour:
   m_ObjectHideFlags: 0
