@@ -38,6 +38,7 @@ public class InstructionSceneController : MonoBehaviour
         else
         {
             step = s;
+            uiController.setCurrentStep(step);
             origamiAnimator.Play($"Step{step}");
             stepLabel.text = $"{step} / {stepTotal}";
 
