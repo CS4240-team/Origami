@@ -36,7 +36,7 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
         {
             Vector3 inputDir = eventData.InputData;
             float z = (inputDir.x + inputDir.y) * rotationSpeed;
-            z = ClampAngle(z, stepmenuScript.getStepTotal("crane") * (stepmenuScript.getAngle() - 1) * -1, 0f);
+            z = ClampAngle(z, (stepmenuScript.getStepTotal("crane") - 1) * stepmenuScript.getAngle() * -1, 0f);
 
             transform.Rotate(new Vector3(0,0,z));
         }
