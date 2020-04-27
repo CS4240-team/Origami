@@ -7,6 +7,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
 {
     public StepMenuController stepmenuScript;
+    public UIController uiController;
 
     public float rotationSpeed = 1;
 
@@ -36,7 +37,7 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
         {
             Vector3 inputDir = eventData.InputData;
             float z = (inputDir.x + inputDir.y) * rotationSpeed;
-            z = ClampAngle(z, (stepmenuScript.getStepTotal("crane") - 1) * stepmenuScript.getAngle() * -1, 0f);
+            z = ClampAngle(z, (uiController.getStepsTotal("crane") - 1) * stepmenuScript.getAngle() * -1, 0f);
 
             transform.Rotate(new Vector3(0,0,z));
         }
@@ -75,6 +76,7 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
         // accepts e.g. -80, 80
         if (angle < 0f) angle = 360 + angle;
         if (angle > 180f) return Mathf.Max(angle, 360 + from);
+        Debug.Log(angle + " " + Mathf.Min(angle, to));
         return Mathf.Min(angle, to);
     }
 }
