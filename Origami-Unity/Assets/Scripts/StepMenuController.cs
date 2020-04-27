@@ -26,6 +26,7 @@ namespace Microsoft.MixedReality.Toolkit.UI
             int stepsTotal = uiController.getStepsTotal(origami);
             populateStepsMenu(currentStep, stepsTotal);
             stepsMenu.SetActive(true);
+            uiController.setCurrentMenu(3);
         }
 
         public void selectStep(int stepNo)

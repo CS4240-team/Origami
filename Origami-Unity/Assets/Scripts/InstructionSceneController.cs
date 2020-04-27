@@ -23,6 +23,7 @@ public class InstructionSceneController : MonoBehaviour
         stepTotal = uiController.getStepsTotal(origami_name);
         origamiAnimator = origami.GetComponent<Animator>();
         setStep(uiController.getCurrentStep());
+        uiController.setCurrentMenu(2);
     }
 
     public void changeStep(int n)

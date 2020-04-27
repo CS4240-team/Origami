@@ -26,7 +26,6 @@ public class UIController : MonoBehaviour
 
         menus[currentMenu].SetActive(false);
         menus[1].SetActive(true);
-        currentMenu = 1;
     }
 
     public void displayInstructionMenu(int stepNo = 1, string origami_name = "")
@@ -38,14 +37,12 @@ public class UIController : MonoBehaviour
 
         menus[currentMenu].SetActive(false);
         menus[2].SetActive(true);
-        currentMenu = 2;
     }
 
     public void displayStepSelectionScreen()
     {
         menus[currentMenu].SetActive(false);
         menus[3].SetActive(true);
-        currentMenu = 3;
     }
 
     public string getOrigami()
@@ -63,5 +60,11 @@ public class UIController : MonoBehaviour
         if (origami_name.Equals("crane"))
             return 10;
         return 10;
+    }
+
+    public void setCurrentMenu(int menuNo)
+    {
+        Debug.Log($"currentMenu: {menuNo}");
+        currentMenu = menuNo;
     }
 }
