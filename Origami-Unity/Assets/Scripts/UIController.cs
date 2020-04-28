@@ -62,13 +62,11 @@ public class UIController : MonoBehaviour
 
     public void setCurrentMenu(int menuNo)
     {
-        Debug.Log($"currentMenu: {menuNo}");
         currentMenu = menuNo;
     }
 
     public void setCurrentStep(int stepNo)
     {
-        Debug.Log($"current step: {stepNo}");
         currentStep = stepNo;
     }
 }

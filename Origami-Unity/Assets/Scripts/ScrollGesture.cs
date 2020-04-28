@@ -39,7 +39,6 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
             //gameObject.transform.Rotate(new Vector3(0f, 0f, (inputDir.x + inputDir.y) * rotationSpeed));
             Vector3 rot = transform.localRotation.eulerAngles + new Vector3(0, 0, (inputDir.x - inputDir.z) * rotationSpeed); //use local if your char is not always oriented Vector3.up
             rot.z = ClampAngle(rot.z, (uiController.getStepsTotal("crane") - 1) * stepmenuScript.getAngle() * -1, 0f);
-            Debug.Log(rot);
             transform.localRotation = Quaternion.Euler(rot);
         }
     }

@@ -19,6 +19,7 @@ public class InstructionSceneController : MonoBehaviour
 
     private void OnEnable()
     {
+        step = 1;
         string origami_name = uiController.getOrigami();
         stepTotal = uiController.getStepsTotal(origami_name);
         origamiAnimator = origami.GetComponent<Animator>();
@@ -49,10 +50,7 @@ public class InstructionSceneController : MonoBehaviour
             if (step >= stepTotal)
                 rightArrow.IsEnabled = false;
             else if (step <= 1)
-            {
                 leftArrow.IsEnabled = false;
-                Debug.Log("step: " + step);
-            }
             else
             {
                 leftArrow.IsEnabled = true;
