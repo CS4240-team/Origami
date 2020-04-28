@@ -643,7 +643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 110750741}
   m_Layer: 0
-  m_Name: OrigamiSelectionObjects
+  m_Name: MainMenuObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 193553637}
   - component: {fileID: 193553636}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: GlobalSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5686,7 +5686,7 @@ GameObject:
   - component: {fileID: 951209563}
   - component: {fileID: 951209565}
   m_Layer: 0
-  m_Name: SceneController
+  m_Name: StepMenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9911,7 +9911,7 @@ GameObject:
   - component: {fileID: 1680914251}
   - component: {fileID: 1680914252}
   m_Layer: 0
-  m_Name: SceneController
+  m_Name: InstructionSceneController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10395,7 +10395,7 @@ GameObject:
   - component: {fileID: 1763143443}
   - component: {fileID: 1763143444}
   m_Layer: 0
-  m_Name: SceneController
+  m_Name: MainMenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

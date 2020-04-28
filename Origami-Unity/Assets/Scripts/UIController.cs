@@ -56,7 +56,7 @@ public class UIController : MonoBehaviour
     public int getStepsTotal(string origami_name)
     {
         if (origami_name.Equals("crane"))
-            return 10;
+            return 16;
         return 10;
     }
 
