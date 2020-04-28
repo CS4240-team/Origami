@@ -76,7 +76,6 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
         // accepts e.g. -80, 80
         if (angle < 0f) angle = 360 + angle;
         if (angle > 180f) return Mathf.Max(angle, 360 + from);
-        Debug.Log(angle + " " + Mathf.Min(angle, to));
         return Mathf.Min(angle, to);
     }
 }

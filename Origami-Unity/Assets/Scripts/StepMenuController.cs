@@ -11,20 +11,38 @@ namespace Microsoft.MixedReality.Toolkit.UI
         public GameObject stepsMenu;
         public GameObject stepButtonPrefab;
         public GameObject stepMenuCircle;
+        public GameObject crane;
         public UIController uiController;
         public Theme buttonTheme;
         public Theme currentButtonTheme;
         public States buttonsStates;
+        public TextMeshPro circleText;
 
         private readonly float menuRadius = -13.2f;
         private readonly float angle = 7f;
+        private string origami = "";
+        private GameObject origami_model;
+        private int currentStep;
+        private int stepsTotal;
 
         private void OnEnable()
         {
             Debug.Log("Switching to Steps Menu");
-            string origami = uiController.getOrigami();
-            int currentStep = uiController.getCurrentStep();
-            int stepsTotal = uiController.getStepsTotal(origami);
+            if (!origami.Equals(uiController.getOrigami()))
+            {
+                var plane = transform.root;
+                var margin = new Vector3(0.15f, 0, 0.25f);
+                var corner = new Vector3(plane.transform.localScale.x * 10 / 2, 0, plane.transform.localScale.z * 10 / 2);
+                if (origami_model != null)
+                    Destroy(origami_model);
+                origami_model = Instantiate(crane, plane.transform.position + corner - margin, crane.transform.rotation, stepsMenu.transform);
+            } 
+            origami = uiController.getOrigami();
+            currentStep = uiController.getCurrentStep();
+            stepsTotal = uiController.getStepsTotal(origami);
+
+            circleText.text = $"{origami.ToUpper().Substring(0,1) + origami.Substring(1)}\n\nCurrent step: \n{currentStep} / {stepsTotal}";
+
             populateStepsMenu(currentStep, stepsTotal);
             stepsMenu.SetActive(true);
             uiController.setCurrentMenu(3);
