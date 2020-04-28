@@ -6090,9 +6090,6 @@ MonoBehaviour:
   - Target: {fileID: 1035012005}
     Themes:
     - {fileID: 11400000, guid: 7028b3ef64ce83b4d9ee01fc512feefb, type: 2}
-  - Target: {fileID: 1035012005}
-    Themes:
-    - {fileID: 11400000, guid: a63bad7b69d06334698d2b952d480908, type: 2}
   OnClick:
     m_PersistentCalls:
       m_Calls: []
