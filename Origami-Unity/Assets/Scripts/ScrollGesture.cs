@@ -7,6 +7,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
 {
     public StepMenuController stepmenuScript;
+    public UIController uiController;
 
     public float rotationSpeed = 1;
 
@@ -35,10 +36,10 @@ public class ScrollGesture : MonoBehaviour, IMixedRealityGestureHandler<Vector3>
         if (inputActionType == "Navigation Action")
         {
             Vector3 inputDir = eventData.InputData;
-            float z = (inputDir.x + inputDir.y) * rotationSpeed;
-            z = ClampAngle(z, (stepmenuScript.getStepTotal("crane") - 1) * stepmenuScript.getAngle() * -1, 0f);
-
-            transform.Rotate(new Vector3(0,0,z));
+            //gameObject.transform.Rotate(new Vector3(0f, 0f, (inputDir.x + inputDir.y) * rotationSpeed));
+            Vector3 rot = transform.localRotation.eulerAngles + new Vector3(0, 0, (inputDir.x - inputDir.z) * rotationSpeed); //use local if your char is not always oriented Vector3.up
+            rot.z = ClampAngle(rot.z, (uiController.getStepsTotal("crane") - 1) * stepmenuScript.getAngle() * -1, 0f);
+            transform.localRotation = Quaternion.Euler(rot);
         }
     }
 

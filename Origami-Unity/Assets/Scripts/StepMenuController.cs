@@ -11,27 +11,41 @@ namespace Microsoft.MixedReality.Toolkit.UI
         public GameObject stepsMenu;
         public GameObject stepButtonPrefab;
         public GameObject stepMenuCircle;
+        public GameObject crane;
         public UIController uiController;
         public Theme buttonTheme;
+        public Theme currentButtonTheme;
         public States buttonsStates;
+        public TextMeshPro circleText;
 
         private readonly float menuRadius = -13.2f;
         private readonly float angle = 7f;
-        private int stepCount = 10;
+        private string origami = "";
+        private GameObject origami_model;
+        private int currentStep;
+        private int stepsTotal;
 
-        private void Awake()
-        {
-            //For testing
-            populateStepsMenu(1, stepCount);
-        }
-
-        public void displayStepSelectionScreen(string origami)
+        private void OnEnable()
         {
             Debug.Log("Switching to Steps Menu");
-            int stepsTotal = getStepTotal(origami);
-            int currentStep = uiController.getCurrentStep();
+            if (!origami.Equals(uiController.getOrigami()))
+            {
+                var plane = transform.root;
+                var margin = new Vector3(0.15f, 0, 0.25f);
+                var corner = new Vector3(plane.transform.localScale.x * 10 / 2, 0, plane.transform.localScale.z * 10 / 2);
+                if (origami_model != null)
+                    Destroy(origami_model);
+                origami_model = Instantiate(crane, plane.transform.position + corner - margin, crane.transform.rotation, stepsMenu.transform);
+            } 
+            origami = uiController.getOrigami();
+            currentStep = uiController.getCurrentStep();
+            stepsTotal = uiController.getStepsTotal(origami);
+
+            circleText.text = $"{origami.ToUpper().Substring(0,1) + origami.Substring(1)}\n\nCurrent step: \n{currentStep} / {stepsTotal}";
+
             populateStepsMenu(currentStep, stepsTotal);
             stepsMenu.SetActive(true);
+            uiController.setCurrentMenu(3);
         }
 
         public void selectStep(int stepNo)
@@ -39,20 +53,13 @@ namespace Microsoft.MixedReality.Toolkit.UI
             Debug.Log($"Step {stepNo} selected");
             unpopulateMenu();
             stepsMenu.SetActive(false);
-            uiController.displayInstructionMenu(stepNo);
+            uiController.setCurrentStep(stepNo);
+            uiController.displayInstructionMenu();
         }
 
         private void RotateMenu(float deg)
         {
             stepMenuCircle.transform.Rotate(0, 0, -deg);
-        }
-
-        public int getStepTotal(string origami)
-        {
-            //Return a fixed number for now
-            if(origami.Equals("crane"))
-                return 10;
-            return 10;
         }
 
         public float getAngle()
@@ -62,13 +69,19 @@ namespace Microsoft.MixedReality.Toolkit.UI
 
         private void populateStepsMenu(int current, int total)
         {
+            Vector3 parentGlobalScale = stepMenuCircle.transform.lossyScale;
+            Vector3 parentPosition = stepMenuCircle.transform.position;
+            Quaternion parentRotation = stepMenuCircle.transform.rotation;
+
             for (int x = 0; x < total; x++)
             {
                 //Create button
-                Vector3 pos = new Vector3(Mathf.Cos(x * angle * Mathf.Deg2Rad) * menuRadius, Mathf.Sin(x * angle * Mathf.Deg2Rad) * menuRadius, 0);
+                Vector3 pos = new Vector3(Mathf.Cos(x * angle * Mathf.Deg2Rad) * menuRadius * parentGlobalScale.x,
+                                          Mathf.Sin(x * angle * Mathf.Deg2Rad) * menuRadius * parentGlobalScale.y,
+                                          0);
                 Quaternion rot = Quaternion.Euler(0f, 0f, x * angle);
-                pos = stepMenuCircle.transform.rotation * pos;
-                GameObject buttonInstance = Instantiate(stepButtonPrefab, stepMenuCircle.transform.position + pos, stepMenuCircle.transform.rotation * rot, stepMenuCircle.transform);
+                pos = parentRotation * pos;
+                GameObject buttonInstance = Instantiate(stepButtonPrefab, parentPosition + pos, parentRotation * rot, stepMenuCircle.transform);
                 buttonInstance.name = $"button {x + 1}";
 
                 //Change number accordingly
@@ -85,23 +98,22 @@ namespace Microsoft.MixedReality.Toolkit.UI
 
                 //Add interable component
                 Interactable interactable = buttonInstance.AddComponent<Interactable>();
+                Theme theme;
                 interactable.States = buttonsStates;
+                if (x == current - 1)
+                    theme = currentButtonTheme;
+                else
+                    theme = buttonTheme;
                 interactable.Profiles = new List<InteractableProfileItem>()
                 {
                     new InteractableProfileItem()
                     {
-                        Themes = new List<Theme>() { buttonTheme },
+                        Themes = new List<Theme>() { theme },
                         Target = buttonInstance
                     }
                 };
 
                 interactable.OnClick.AddListener(() => this.selectStep(int.Parse(buttonInstance.name.Substring(7))));
-
-                //Disable the currently chosen step
-                if (x == current - 1)
-                {
-                    interactable.IsEnabled = false;
-                }
 
             }
             RotateMenu((current - 1) * angle);
