@@ -7,6 +7,7 @@ using System;
 public class MainMenuController : MonoBehaviour
 {
     public GameObject origamiParent;
+    public UIController uiController;
 
     private BoundingBox[] origamiBoxes;
     private List<Vector3> initPositions = new List<Vector3>();
@@ -32,6 +33,7 @@ public class MainMenuController : MonoBehaviour
             origamiBoxes[i].transform.rotation = initRotations[i];
             origamiBoxes[i].transform.position = initPositions[i];
         }
+        uiController.setCurrentMenu(1);
     }
 
     public void activateBoundingBox()

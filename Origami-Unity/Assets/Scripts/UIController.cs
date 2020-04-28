@@ -19,33 +19,28 @@ public class UIController : MonoBehaviour
         {
             Transform setupTransform = setupPlane.transform;
             plane.transform.position = setupTransform.position;
-            plane.transform.localScale = new Vector3(setupTransform.localScale.x, plane.transform.localScale.y, setupTransform.localScale.z) / 10;
+            plane.transform.localScale = new Vector3(setupTransform.localScale.x, (setupTransform.localScale.x + setupTransform.localScale.z)/2, setupTransform.localScale.z) / 10;
             plane.transform.rotation = setupTransform.rotation;
             plane.SetActive(true);
         }
 
         menus[currentMenu].SetActive(false);
         menus[1].SetActive(true);
-        currentMenu = 1;
     }
 
-    public void displayInstructionMenu(int stepNo = 1, string origami_name = "")
+    public void displayInstructionMenu(string origami_name = "")
     {
         if(!origami_name.Equals(""))
             origami = origami_name.ToLower();
 
-        currentStep = stepNo;
-
         menus[currentMenu].SetActive(false);
         menus[2].SetActive(true);
-        currentMenu = 2;
     }
 
     public void displayStepSelectionScreen()
     {
         menus[currentMenu].SetActive(false);
         menus[3].SetActive(true);
-        currentMenu = 3;
     }
 
     public string getOrigami()
@@ -63,5 +58,15 @@ public class UIController : MonoBehaviour
         if (origami_name.Equals("crane"))
             return 10;
         return 10;
+    }
+
+    public void setCurrentMenu(int menuNo)
+    {
+        currentMenu = menuNo;
+    }
+
+    public void setCurrentStep(int stepNo)
+    {
+        currentStep = stepNo;
     }
 }
