@@ -28,6 +28,7 @@ namespace Microsoft.MixedReality.Toolkit.UI
         private void OnEnable()
         {
             Debug.Log("Switching to Steps Menu");
+            //Instantiate origami model on the inner circle
             if (!origami.Equals(uiController.getOrigami()))
             {
                 var plane = transform.root;
@@ -41,6 +42,7 @@ namespace Microsoft.MixedReality.Toolkit.UI
             currentStep = uiController.getCurrentStep();
             stepsTotal = uiController.getStepsTotal(origami);
 
+            //Change inner circle text
             if(!origami.Equals(""))
                 circleText.text = $"{origami.ToUpper().Substring(0,1) + origami.Substring(1)}\n\nCurrent step: \n{currentStep} / {stepsTotal}";
 
@@ -83,7 +85,13 @@ namespace Microsoft.MixedReality.Toolkit.UI
                 Quaternion rot = Quaternion.Euler(0f, 0f, x * angle);
                 pos = parentRotation * pos;
                 GameObject buttonInstance = Instantiate(stepButtonPrefab, parentPosition + pos, parentRotation * rot, stepMenuCircle.transform);
+
                 buttonInstance.name = $"button {x + 1}";
+
+                //Assign instruction image to buttons
+                var img = Resources.Load<Sprite>($"{origami}/{origami}{x+1}");
+                var imgComponent = buttonInstance.transform.Find("Image").GetComponent<Image>();
+                imgComponent.sprite = img;
 
                 //Change number accordingly
                 GameObject grandchild = buttonInstance.transform.GetChild(0).GetChild(0).gameObject;
@@ -117,7 +125,6 @@ namespace Microsoft.MixedReality.Toolkit.UI
                 interactable.OnClick.AddListener(() => this.selectStep(int.Parse(buttonInstance.name.Substring(7))));
 
             }
-            Debug.Log((current - 1) * angle);
             RotateMenu((current - 1) * angle);
         }
 
