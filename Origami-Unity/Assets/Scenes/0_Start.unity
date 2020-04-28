@@ -1636,7 +1636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d9acc7968244a8886f3af591305bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeProfile: {fileID: 11400000, guid: bdc6feedf67ee754bbcdf6af51d28eea, type: 2}
+  activeProfile: {fileID: 11400000, guid: 4a73562acac5e5c4f9de0ec5c1617b6b, type: 2}
 --- !u!4 &298872755
 Transform:
   m_ObjectHideFlags: 0
@@ -5651,7 +5651,7 @@ GameObject:
   - component: {fileID: 951209563}
   - component: {fileID: 951209565}
   m_Layer: 0
-  m_Name: UI Controller
+  m_Name: SceneController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5689,6 +5689,7 @@ MonoBehaviour:
   stepMenuCircle: {fileID: 1206998470}
   uiController: {fileID: 193553636}
   buttonTheme: {fileID: 11400000, guid: 60f62ca19010cc34a843638151e5995e, type: 2}
+  currentButtonTheme: {fileID: 11400000, guid: a63bad7b69d06334698d2b952d480908, type: 2}
   buttonsStates: {fileID: 11400000, guid: 5eac1712038236e4b8ffdb3893804fe1, type: 2}
 --- !u!1 &963194225
 GameObject:
@@ -6089,6 +6090,9 @@ MonoBehaviour:
   - Target: {fileID: 1035012005}
     Themes:
     - {fileID: 11400000, guid: 7028b3ef64ce83b4d9ee01fc512feefb, type: 2}
+  - Target: {fileID: 1035012005}
+    Themes:
+    - {fileID: 11400000, guid: a63bad7b69d06334698d2b952d480908, type: 2}
   OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -9511,7 +9515,7 @@ GameObject:
   - component: {fileID: 1680914251}
   - component: {fileID: 1680914252}
   m_Layer: 0
-  m_Name: SceneManager (1)
+  m_Name: SceneController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9995,7 +9999,7 @@ GameObject:
   - component: {fileID: 1763143443}
   - component: {fileID: 1763143444}
   m_Layer: 0
-  m_Name: SceneManager (1)
+  m_Name: SceneController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10633,7 +10637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b3eff181cc4244a8a14234096e62fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFocusRequired: 1
+  isFocusRequired: 0
   keywords:
   - keyword: Set
     response:

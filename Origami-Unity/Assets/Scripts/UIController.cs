@@ -19,7 +19,7 @@ public class UIController : MonoBehaviour
         {
             Transform setupTransform = setupPlane.transform;
             plane.transform.position = setupTransform.position;
-            plane.transform.localScale = new Vector3(setupTransform.localScale.x, plane.transform.localScale.y, setupTransform.localScale.z) / 10;
+            plane.transform.localScale = new Vector3(setupTransform.localScale.x, (setupTransform.localScale.x + setupTransform.localScale.z)/2, setupTransform.localScale.z) / 10;
             plane.transform.rotation = setupTransform.rotation;
             plane.SetActive(true);
         }
@@ -28,12 +28,10 @@ public class UIController : MonoBehaviour
         menus[1].SetActive(true);
     }
 
-    public void displayInstructionMenu(int stepNo = 1, string origami_name = "")
+    public void displayInstructionMenu(string origami_name = "")
     {
         if(!origami_name.Equals(""))
             origami = origami_name.ToLower();
-
-        currentStep = stepNo;
 
         menus[currentMenu].SetActive(false);
         menus[2].SetActive(true);

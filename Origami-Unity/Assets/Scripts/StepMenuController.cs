@@ -13,6 +13,7 @@ namespace Microsoft.MixedReality.Toolkit.UI
         public GameObject stepMenuCircle;
         public UIController uiController;
         public Theme buttonTheme;
+        public Theme currentButtonTheme;
         public States buttonsStates;
 
         private readonly float menuRadius = -13.2f;
@@ -34,7 +35,8 @@ namespace Microsoft.MixedReality.Toolkit.UI
             Debug.Log($"Step {stepNo} selected");
             unpopulateMenu();
             stepsMenu.SetActive(false);
-            uiController.displayInstructionMenu(stepNo);
+            uiController.setCurrentStep(stepNo);
+            uiController.displayInstructionMenu();
         }
 
         private void RotateMenu(float deg)
@@ -78,23 +80,22 @@ namespace Microsoft.MixedReality.Toolkit.UI
 
                 //Add interable component
                 Interactable interactable = buttonInstance.AddComponent<Interactable>();
+                Theme theme;
                 interactable.States = buttonsStates;
+                if (x == current - 1)
+                    theme = currentButtonTheme;
+                else
+                    theme = buttonTheme;
                 interactable.Profiles = new List<InteractableProfileItem>()
                 {
                     new InteractableProfileItem()
                     {
-                        Themes = new List<Theme>() { buttonTheme },
+                        Themes = new List<Theme>() { theme },
                         Target = buttonInstance
                     }
                 };
 
                 interactable.OnClick.AddListener(() => this.selectStep(int.Parse(buttonInstance.name.Substring(7))));
-
-                //Disable the currently chosen step
-                if (x == current - 1)
-                {
-                    interactable.IsEnabled = false;
-                }
 
             }
             RotateMenu((current - 1) * angle);

@@ -26,6 +26,11 @@ public class InstructionSceneController : MonoBehaviour
         uiController.setCurrentMenu(2);
     }
 
+    private void OnDisable()
+    {
+        uiController.setCurrentStep(step);
+    }
+
     public void changeStep(int n)
     {
         setStep(step + n);
@@ -38,7 +43,6 @@ public class InstructionSceneController : MonoBehaviour
         else
         {
             step = s;
-            uiController.setCurrentStep(step);
             origamiAnimator.Play($"Step{step}");
             stepLabel.text = $"{step} / {stepTotal}";
 
