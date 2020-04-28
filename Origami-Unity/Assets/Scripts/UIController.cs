@@ -10,7 +10,7 @@ public class UIController : MonoBehaviour
 
     private int currentStep = 1;
     private int currentMenu = 0;    // 0 = setUp, 1 = main, 2 = instruction, 3 = steps
-    private string origami = "";
+    private string origami = "crane";
 
     public void displayMainMenu()
     {

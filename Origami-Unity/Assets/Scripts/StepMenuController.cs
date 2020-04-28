@@ -83,7 +83,12 @@ namespace Microsoft.MixedReality.Toolkit.UI
                 Quaternion rot = Quaternion.Euler(0f, 0f, x * angle);
                 pos = parentRotation * pos;
                 GameObject buttonInstance = Instantiate(stepButtonPrefab, parentPosition + pos, parentRotation * rot, stepMenuCircle.transform);
+
                 buttonInstance.name = $"button {x + 1}";
+
+                var img = Resources.Load<Sprite>($"{origami}/{origami}{x+1}");
+                var imgComponent = buttonInstance.transform.Find("Image").GetComponent<Image>();
+                imgComponent.sprite = img;
 
                 //Change number accordingly
                 GameObject grandchild = buttonInstance.transform.GetChild(0).GetChild(0).gameObject;
