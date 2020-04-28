@@ -41,7 +41,8 @@ namespace Microsoft.MixedReality.Toolkit.UI
             currentStep = uiController.getCurrentStep();
             stepsTotal = uiController.getStepsTotal(origami);
 
-            circleText.text = $"{origami.ToUpper().Substring(0,1) + origami.Substring(1)}\n\nCurrent step: \n{currentStep} / {stepsTotal}";
+            if(!origami.Equals(""))
+                circleText.text = $"{origami.ToUpper().Substring(0,1) + origami.Substring(1)}\n\nCurrent step: \n{currentStep} / {stepsTotal}";
 
             populateStepsMenu(currentStep, stepsTotal);
             stepsMenu.SetActive(true);
@@ -59,7 +60,7 @@ namespace Microsoft.MixedReality.Toolkit.UI
 
         private void RotateMenu(float deg)
         {
-            stepMenuCircle.transform.Rotate(0, 0, -deg);
+            stepMenuCircle.transform.localRotation = Quaternion.Euler(0, 0, -deg);
         }
 
         public float getAngle()
@@ -116,6 +117,7 @@ namespace Microsoft.MixedReality.Toolkit.UI
                 interactable.OnClick.AddListener(() => this.selectStep(int.Parse(buttonInstance.name.Substring(7))));
 
             }
+            Debug.Log((current - 1) * angle);
             RotateMenu((current - 1) * angle);
         }
 
