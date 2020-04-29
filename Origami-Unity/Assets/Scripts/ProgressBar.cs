@@ -15,7 +15,7 @@ public class ProgressBar : MonoBehaviour
 		barFill = transform.GetChild(0).GetChild(0).gameObject;
 		speed = 0;
 
-		uiController = GameObject.Find("SceneManager").GetComponent<UIController>();
+		uiController = GameObject.Find("GlobalSceneManager").GetComponent<UIController>();
 	}
 
 	void Update()
@@ -38,7 +38,7 @@ public class ProgressBar : MonoBehaviour
 					break;
 				}
 			}
-			if(rootChild.name.Equals("OrigamiSelectionObjects"))
+			if(rootChild.name.Equals("MainMenuObjects"))
 				uiController.displayInstructionMenu(origami_name: transform.parent.name.ToLower());
 			else if(rootChild.name.Equals("InstructionObjects"))
 			{

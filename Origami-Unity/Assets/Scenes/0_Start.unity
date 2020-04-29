@@ -643,7 +643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 110750741}
   m_Layer: 0
-  m_Name: OrigamiSelectionObjects
+  m_Name: MainMenuObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &149685452
 Transform:
   m_ObjectHideFlags: 0
@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 193553637}
   - component: {fileID: 193553636}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: GlobalSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1378,7 +1378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &277616810
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5691,7 +5691,7 @@ GameObject:
   - component: {fileID: 951209563}
   - component: {fileID: 951209565}
   m_Layer: 0
-  m_Name: SceneController
+  m_Name: StepMenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9757,7 +9757,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Crane - 19 steps
+  m_text: Crane - 16 steps
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9916,7 +9916,7 @@ GameObject:
   - component: {fileID: 1680914251}
   - component: {fileID: 1680914252}
   m_Layer: 0
-  m_Name: SceneController
+  m_Name: InstructionSceneController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10400,7 +10400,7 @@ GameObject:
   - component: {fileID: 1763143443}
   - component: {fileID: 1763143444}
   m_Layer: 0
-  m_Name: SceneController
+  m_Name: MainMenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10831,7 +10831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1910036744
 MonoBehaviour:
   m_ObjectHideFlags: 0
