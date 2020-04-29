@@ -46,16 +46,16 @@ public class InstructionSceneController : MonoBehaviour
             step = s;
             origamiAnimator.Play($"Step{step}");
             stepLabel.text = $"{step} / {stepTotal}";
+        }
 
-            if (step >= stepTotal)
-                rightArrow.IsEnabled = false;
-            else if (step <= 1)
-                leftArrow.IsEnabled = false;
-            else
-            {
-                leftArrow.IsEnabled = true;
-                rightArrow.IsEnabled = true;
-            }
+        if (step >= stepTotal)
+            rightArrow.IsEnabled = false;
+        else if (step <= 1)
+            leftArrow.IsEnabled = false;
+        else
+        {
+            leftArrow.IsEnabled = true;
+            rightArrow.IsEnabled = true;
         }
     }
 }

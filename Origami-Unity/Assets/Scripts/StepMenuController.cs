@@ -32,11 +32,10 @@ namespace Microsoft.MixedReality.Toolkit.UI
             if (!origami.Equals(uiController.getOrigami()))
             {
                 var plane = transform.root;
-                var margin = new Vector3(0.15f, 0, 0.25f);
-                var corner = new Vector3(plane.transform.localScale.x * 10 / 2, 0, plane.transform.localScale.z * 10 / 2);
                 if (origami_model != null)
                     Destroy(origami_model);
-                origami_model = Instantiate(crane, plane.transform.position + corner - margin, crane.transform.rotation, stepsMenu.transform);
+                origami_model = Instantiate(crane, stepsMenu.transform);
+                origami_model.transform.localPosition = new Vector3(3.75f, 0, 3);
             } 
             origami = uiController.getOrigami();
             currentStep = uiController.getCurrentStep();
